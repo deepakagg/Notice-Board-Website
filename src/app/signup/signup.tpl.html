@@ -1,0 +1,36 @@
+<div class="form">
+	<h3>
+		Sign Up
+	</h3>
+	<form name="signupForm" ng-submit="signup()" >
+		<div class="form-group"
+		     ng-class="{'has-error': signupForm.email.$invalid && signupForm.email.$dirty}">
+			<input class="form-control" name="email" type="email"
+			       placeholder="Email" required ng-model="session.email" />
+       <span class="help-block"
+             ng-show="signupForm.email.$error.required && signupForm.email.$dirty">Required</span>
+		 <span class="help-block"
+		       ng-show="signupForm.email.$error.email && signupForm.email.$dirty">Please enter a valid email</span>
+		</div>
+		<div class="form-group"
+		     ng-class="{'has-error': signupForm.password.$invalid && signupForm.password.$dirty}">
+			<input class="form-control" name="password" type="password"
+			       placeholder="Password" required ng-model="session.password" />
+       <span class="help-block"
+             ng-show="signupForm.password.$error.required && signupForm.password.$dirty">Required</span>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary pull-right"
+			        value="Signup" title="Signup" ng-disabled="!signupForm.$valid">
+				<span>Sign up</span>
+			</button>
+		</div>
+	</form>
+
+	<div class="link">
+		<a ui-sref="login">
+			Already have an account!
+		</a>
+	</div>
+
+</div>

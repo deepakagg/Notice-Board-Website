@@ -1,0 +1,35 @@
+<div class="post-form">
+	<form name="postForm" ng-submit="postMessage()" >
+		<div class="form-group"
+		     ng-class="{'has-error': postForm.email.$invalid && postForm.email.$dirty}">
+			<input class="form-control" name="message" type="text" rows="2"
+			       placeholder="Post Message" required ng-model="post.message" />
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary pull-right"
+			        value="Post" title="Post" ng-disabled="!postForm.$valid">
+				<span>Post</span>
+			</button>
+		</div>
+	</form>
+
+	<div class="link">
+	</div>
+
+</div>
+
+<div class="latest-messages-container">
+	<div ng-repeat="message in messages" class="message">
+		<div class="message-comment">
+			{{message.comment}}
+		</div>
+
+		<span class="user-email">
+			{{message.user_email}}
+		</span>
+
+		<span class="message-date">
+			{{message.date}}
+		</span>
+	</div>
+</div>
