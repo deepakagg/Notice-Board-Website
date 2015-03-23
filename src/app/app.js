@@ -60,12 +60,39 @@ angular.module( 'ida', [
                        // User is not logged in
                         $state.go('login');
                     });
+            },
+
+            setCurrentUserAsLoggedIn: function(){
+                $rootScope.currentUserLoggedIn = true;
             }
-        }
+        };
     }]);
 
 angular.module('ida.controllers', [])
-  .controller('idaMainController', ['$scope', '$rootScope', function($scope, $rootScope){
+  .controller('idaMainController', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout){
 
+        $scope.alert = {
+            _message : "hi",
+            _alert_type : "",
+            _show_alert: false,
+            _old_timeout_instance: undefined,
+            _showAlertMessage : function(){
+                var that = this;
+                // Checking if old timeout exists
+                if(this._old_timeout_instance){
+                    // Cancelling old timeout
+                    $timeout.cancel(this._old_timeout_instance);
+                }
+                this._show_alert = true;
+                this._old_timeout_instance = $timeout(function(){
+                    that._show_alert = false;
+                }, 1500);
+            },
+            showAlertMessage : function(message, alert_type){
+                this._message = message;
+                this._alert_type = alert_type;
+                this._showAlertMessage();
+            }
+        }
   }]);
 

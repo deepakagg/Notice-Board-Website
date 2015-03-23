@@ -40,12 +40,19 @@ angular.module('ida.controllers')
 
         // For posting new messages
         $scope.postMessage =  function(){
+            $scope.alert.showAlertMessage("Posting message", "warning");
             HomeHelper.postMessage($scope.post.message, function (result){
                 if(result){
+                    $scope.alert.showAlertMessage("Message Posted", "success");
                     //Fetching new messages from the server
                     $scope.fetchNewMessages();
                 }
+                else{
+                    $scope.alert.showAlertMessage("Unable to post new message", "error");
+                }
             });
+            // Clearing message
+            $scope.post.message = undefined;
         };
 
         // Fetching messages form the server initially
